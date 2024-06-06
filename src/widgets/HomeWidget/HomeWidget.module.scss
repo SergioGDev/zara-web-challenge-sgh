@@ -1,0 +1,12 @@
+@import "@/app/variables.scss";
+
+.marginsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 20px;
+
+  max-width: 1400px;
+  width: 100%;
+}
