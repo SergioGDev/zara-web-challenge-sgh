@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 5px;
+  flex-direction: column;
+
+  height: 380px;
+  width: 180px;
+
+  .comicName {
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 20px;
+  }
+
+  .year {
+    font-size: 14px;
+    font-weight: 300;
+    color: gray;
+  }
+}

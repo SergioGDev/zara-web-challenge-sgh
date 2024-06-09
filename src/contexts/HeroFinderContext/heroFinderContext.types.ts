@@ -1,14 +1,24 @@
-import { HeroDataResult } from "@/types/heroAxiosResp.types";
+import { ComicDataResult, HeroDataResult } from "@/types/heroAxiosResp.types";
 
 export type HeroFinderContextType = {
-    finderText: string;
-    favsHeros: HeroDataResult[];
-    heroList: HeroDataResult[];
+  finderText: string;
+  favsHeros: HeroDataResult[];
+  heroList: HeroDataResult[];
+  showFavList: boolean;
 
-    errorMsg: string;
-    loadingData: boolean;
+  errorMsg: string;
+  loadingData: boolean;
+
+  heroDataDetail?: HeroDataResult;
+  heroComicsDetail?: ComicDataResult[];
 };
 
 export type HeroFinderContextProps = HeroFinderContextType & {
-    // Insert here the functions to modify state;
+  addHeroToFavList: (heroData: HeroDataResult) => void;
+  removeHeroFromFavList: (id: number) => void;
+  setShowFavList: (show: boolean) => void;
+  setHeroDataDetail: (heroData: HeroDataResult) => void;
+  setErrorGettingInfo: () => void;
+  getDetailHerolData: (idHero: number) => Promise<void>;
+  setFinderInputText: (inputText: string) => void;
 };

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import MainLayout from "@/layouts/MainLayout/MainLayout";
+import { HeroFinderContextProvider } from "@/contexts/HeroFinderContext/HeroFinderContextProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true} className={inter.className}>
-        <MainLayout>{children}</MainLayout>
+        <HeroFinderContextProvider>
+          <MainLayout>{children}</MainLayout>
+        </HeroFinderContextProvider>
       </body>
     </html>
   );

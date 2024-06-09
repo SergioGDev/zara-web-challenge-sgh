@@ -1,7 +1,12 @@
 import { HeroFinderContextType } from "./heroFinderContext.types";
 
 export const initialHeroFinderContextState: HeroFinderContextType = {
-    // Add here de initial state of the vars:
-    // exampleVarA: false,
-    // exampleVarB: '',
+    finderText: '',
+    favsHeros: [],
+    heroList: [],
+    showFavList: false,
+    heroDataDetail: undefined,
+
+    errorMsg: '',
+    loadingData: false, 
 };

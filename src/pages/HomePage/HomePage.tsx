@@ -2,15 +2,14 @@
 import React from "react";
 import styles from "./HomePage.module.scss";
 
-import HomeWidget from "@/widgets/HomeWidget/HomeWidget";
-import { HeroFinderContextProvider } from "@/contexts/HeroFinderContext/HeroFinderContextProvider";
+import FinderInput from "@/components/FinderInput/FinderInput";
+import CardsContainer from "@/components/CardsContainer/CardsContainer";
 
 const HomePage = () => {
   return (
     <div className={styles.container}>
-      <HeroFinderContextProvider>
-        <HomeWidget />
-      </HeroFinderContextProvider>
+      <FinderInput />
+      <CardsContainer />
     </div>
   );
 };

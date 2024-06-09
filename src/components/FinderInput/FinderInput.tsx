@@ -3,20 +3,30 @@ import styles from "./FinderInput.module.scss";
 import { useHeroFinderContext } from "@/contexts/HeroFinderContext/HeroFinderContextProvider";
 
 const FinderInput = () => {
-  const { heroList, loadingData, errorMsg } = useHeroFinderContext();
+  const { heroList, loadingData, errorMsg, finderText, setFinderInputText } =
+    useHeroFinderContext();
+
+  const handleOnChangeInput = (
+    event: React.ChangeEvent<HTMLInputElement> | undefined,
+  ) => {
+    setFinderInputText(event!.target.value);
+  };
 
   return (
     <div className={styles.inputFinder}>
-      <input type="text" placeholder="Search a character..." />
-      {!loadingData && (
+      <input
+        type="text"
+        placeholder="Search a character..."
+        value={finderText}
+        onChange={handleOnChangeInput}
+      />
+      {!loadingData && heroList && (
         <div className={styles.resultsInfo}>
           {`${heroList?.length} results`}{" "}
         </div>
       )}
 
-      <div className={styles.loadingData}>
-        {loadingData && "Loading data..."}
-      </div>
+      {loadingData && <div className={styles.loadingData}>Loading data...</div>}
       {errorMsg && <div className={styles.error}>{errorMsg}</div>}
     </div>
   );

@@ -5,10 +5,10 @@ import { useHeroFinderContext } from "@/contexts/HeroFinderContext/HeroFinderCon
 import HeroCard from "../HeroCard/HeroCard";
 
 const CardsContainer = () => {
-  const { heroList } = useHeroFinderContext();
+  const { heroList, showFavList, favsHeros } = useHeroFinderContext();
   return (
     <div className={styles.cardsContainer}>
-      {heroList?.map((heroData) => (
+      {(showFavList ? favsHeros : heroList).map((heroData) => (
         <HeroCard heroData={heroData} key={heroData.id} />
       ))}
     </div>

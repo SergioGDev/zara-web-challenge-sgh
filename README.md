@@ -13,21 +13,18 @@ pnpm dev
 # or
 bun dev
 ```
+tjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Description. Tools
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This project is a React application built with Next.js, designed to provide a robust and modern web application framework. It utilizes several external tools to enhance functionality and development efficiency:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Axios:** Used for making HTTP requests to interact with APIs seamlessly.
+- **md5:** Employed to hash passwords and other sensitive data, ensuring enhanced security.
+- **Sass:** Utilized for styling, allowing for more flexible and maintainable CSS.
 
-## Learn More
+This setup allows for efficient, secure, and scalable web development.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
 ## Deploy on Vercel
 

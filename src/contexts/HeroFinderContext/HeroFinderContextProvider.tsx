@@ -1,3 +1,4 @@
+"use client";
 import React, {
   PropsWithChildren,
   useContext,
@@ -9,11 +10,12 @@ import { HeroFinderContextReducer } from "./HeroFinderContextReducer";
 import { HeroFinderContext } from "./HeroFinderContext";
 import { initialHeroFinderContextState } from "./heroFinderContext.consts";
 import { HeroFinderContextProps } from "./heroFinderContext.types";
-import axios from "axios";
-import md5 from "md5";
-import { Data, HeroDataResult, HeroRoot } from "@/types/heroAxiosResp.types";
-
-const getHeroesListPath = "http://gateway.marvel.com/v1/public/characters";
+import { ComicDataResult, HeroDataResult } from "@/types/heroAxiosResp.types";
+import {
+  getComicsOfHero,
+  getHeroDataById,
+  getHerosData,
+} from "@/helpers/getHerosData";
 
 export const HeroFinderContextProvider = ({ children }: PropsWithChildren) => {
   const [heroFinderData, dispatch] = useReducer(
@@ -22,35 +24,88 @@ export const HeroFinderContextProvider = ({ children }: PropsWithChildren) => {
   );
 
   useEffect(() => {
-    const timestamp = process.env.NEXT_PUBLIC_TIMESTAMP;
-    const publicApiKey = process.env.NEXT_PUBLIC_MARVEL_PUBLIC_API_KEY;
-    const privateApiKey = process.env.NEXT_PUBLIC_MARVEL_PRIVATE_API_KEY;
+    getHerosDataFromMarvelApi();
+  }, []);
 
-    const hash = md5(`${timestamp}${privateApiKey}${publicApiKey}`);
-    const url = `${getHeroesListPath}?ts=${timestamp}&apikey=${publicApiKey}&hash=${hash}&limit=50`;
+  useEffect(() => {
+    const getData = setTimeout(() => {
+      getHerosDataFromMarvelApi(heroFinderData.finderText);
+    }, 1000);
 
-    dispatch({ type: 'setLoading' })
-    axios
-      .get<HeroRoot>(`${url}`)
+    return () => clearTimeout(getData);
+  }, [heroFinderData.finderText]);
+
+  const getHerosDataFromMarvelApi = (name?: string) => {
+    dispatch({ type: "setLoading" });
+    getHerosData(name)
       .then((resp) => {
         dispatch(
           resp.status === 200
-            ? { type: "setHeroList", payload: resp.data.data.results }
+            ? {
+                type: "setHeroList",
+                payload: resp.data.data.results as HeroDataResult[],
+              }
             : { type: "setErrorGettingData" },
         );
       })
       .catch((err) => dispatch({ type: "setErrorGettingData" }));
-  }, []);
+  };
 
-  // const addItem = (item: Item) => dispatch({ type: "addItem", payload: item });
-  // const removeItem = (id: number) => dispatch({ type: "removeItem", payload: id });
+  const addHeroToFavList = (heroData: HeroDataResult) =>
+    dispatch({ type: "addHeroToFavList", payload: heroData });
+
+  const removeHeroFromFavList = (id: number) =>
+    dispatch({ type: "removeHeroFromFavList", payload: id });
+
+  const setShowFavList = (show: boolean) =>
+    dispatch({ type: "setShowFavList", payload: show });
+
+  const setHeroDataDetail = (heroData: HeroDataResult) => {
+    dispatch({ type: "setHeroDataDetail", payload: heroData });
+  };
+
+  const getDetailHerolData = async (idHero: number) => {
+    dispatch({ type: "setLoading" });
+
+    // We'll get the hero data and the comics of that hero
+    const respHeroData = await getHeroDataById(idHero);
+    const respCommics = await getComicsOfHero(idHero);
+
+    if (
+      respHeroData.status === 200 &&
+      respCommics.status === 200 &&
+      respHeroData.data.data.results.length === 1
+    ) {
+      dispatch({
+        type: "setHeroAndComicsDataDetail",
+        payload: {
+          heroData: (respHeroData.data.data.results as HeroDataResult[])[0],
+          comicData: respCommics.data.data.results as ComicDataResult[],
+        },
+      });
+      console.log("-> Gatito");
+    } else {
+      dispatch({ type: "setErrorGettingData" });
+      console.log("-> Gatito");
+    }
+  };
+
+  const setErrorGettingInfo = () => dispatch({ type: "setErrorGettingData" });
+
+  const setFinderInputText = (inputText: string) =>
+    dispatch({ type: "setFinderText", payload: inputText });
 
   const providerObject: HeroFinderContextProps = {
     ...heroFinderData,
 
     // Add here the methods of the provider
-    // addItem,
-    // removeItem,
+    addHeroToFavList,
+    removeHeroFromFavList,
+    setShowFavList,
+    setHeroDataDetail,
+    setErrorGettingInfo,
+    getDetailHerolData,
+    setFinderInputText,
   };
 
   return (
