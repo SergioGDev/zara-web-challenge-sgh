@@ -22,6 +22,6 @@ export const getHeroDataById = async (id: number) => {
 }
 
 export const getComicsOfHero = async (id: number) => {
-  const url = `${getHeroesListPath}/${id}/comics${keysEndpoints}`;
+  const url = `${getHeroesListPath}/${id}/comics${keysEndpoints}&limit=20`;
   return await axios.get<HeroRoot>(`${url}&format=comic`);
 }
