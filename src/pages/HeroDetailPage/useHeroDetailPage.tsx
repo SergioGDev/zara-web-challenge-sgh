@@ -21,7 +21,7 @@ export const useHeroDetailPage = () => {
     const id = pathname!.substring(1, pathname!.length);
 
     getDetailHerolData(+id);
-  }, []);
+  }, [getDetailHerolData, pathname]);
 
   return {
     heroDataDetail,
