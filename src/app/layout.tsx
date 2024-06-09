@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import MainLayout from "@/layouts/MainLayout/MainLayout";
 import { HeroFinderContextProvider } from "@/contexts/HeroFinderContext/HeroFinderContextProvider";
+import MainLayout from "@/layouts/MainLayout/MainLayout";
 
 const inter = Inter({ subsets: ["latin"] });
 
