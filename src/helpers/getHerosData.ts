@@ -2,7 +2,7 @@ import { HeroRoot } from "@/types/heroAxiosResp.types";
 import axios from "axios";
 import md5 from "md5";
 
-const getHeroesListPath = "http://gateway.marvel.com/v1/public/characters";
+const getHeroesListPath = "https://gateway.marvel.com/v1/public/characters";
 
 const timestamp = process.env.NEXT_PUBLIC_TIMESTAMP;
 const publicApiKey = process.env.NEXT_PUBLIC_MARVEL_PUBLIC_API_KEY;

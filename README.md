@@ -32,7 +32,6 @@ This section describes the project's code structure, detailing the key component
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+You can test the desployed version of the app on the next link:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
+[https://zara-web-challenge-sgh.vercel.app/](Zara Web Challenge SGH)
