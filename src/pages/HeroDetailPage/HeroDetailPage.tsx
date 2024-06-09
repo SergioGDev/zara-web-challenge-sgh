@@ -1,21 +1,31 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./HeroDetailPage.module.scss";
 import Image from "next/image";
-import { useHeroDetailPage } from "./useHeroDetailPage";
 import ErrorMsg from "@/components/ErrorMsg/ErrorMsg";
 import ComicInfoContainer from "@/components/ComicInfoContainer/ComicInfoContainer";
+import { useHeroFinderContext } from "@/contexts/HeroFinderContext/HeroFinderContextProvider";
+import { usePathname } from "next/navigation";
 
 const HeroDetailPage = () => {
   const {
-    favsHeros,
     heroDataDetail,
     heroComicsDetail,
+    loadingData,
+    favsHeros,
     addHeroToFavList,
     removeHeroFromFavList,
+    getDetailHerolData,
     errorMsg,
-    loadingData,
-  } = useHeroDetailPage();
+  } = useHeroFinderContext();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const id = pathname!.substring(1, pathname!.length);
+
+    getDetailHerolData(+id);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (errorMsg) {
     return <ErrorMsg errorMsg={errorMsg} />;

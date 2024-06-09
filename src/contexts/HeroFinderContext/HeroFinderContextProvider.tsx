@@ -83,10 +83,8 @@ export const HeroFinderContextProvider = ({ children }: PropsWithChildren) => {
           comicData: respCommics.data.data.results as ComicDataResult[],
         },
       });
-      console.log("-> Gatito");
     } else {
       dispatch({ type: "setErrorGettingData" });
-      console.log("-> Gatito");
     }
   };
 
