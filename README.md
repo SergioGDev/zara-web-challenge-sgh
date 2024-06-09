@@ -34,4 +34,4 @@ This section describes the project's code structure, detailing the key component
 
 You can test the desployed version of the app on the next link:
 
-[https://zara-web-challenge-sgh.vercel.app/](Zara Web Challenge SGH)
+[Zara Web Challenge SGH](https://zara-web-challenge-sgh.vercel.app/)
