@@ -15,7 +15,7 @@ This project is a React application built with Next.js, designed to provide a ro
 
 ## Scripts
 
-- `npm run dev`: Used to runs the server in development mode.
+- `npm run dev`: Used to runs the server in development mode. To test the application locally you must create the `.env.local` file based on the `.env.template` file.
 - `npm run build`: Used to build a production bundle of the app.
 - `npm run test`: Used to run the test of the app.
 
