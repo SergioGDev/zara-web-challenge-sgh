@@ -13,12 +13,13 @@ const FinderInput = () => {
   };
 
   return (
-    <div className={styles.inputFinder}>
+    <div className={styles.inputFinder} data-testid="input-container">
       <input
         type="text"
         placeholder="Search a character..."
         value={finderText}
         onChange={handleOnChangeInput}
+        data-testid="finder-input"
       />
       {!loadingData && heroList && (
         <div className={styles.resultsInfo}>

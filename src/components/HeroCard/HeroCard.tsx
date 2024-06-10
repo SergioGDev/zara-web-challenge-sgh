@@ -30,7 +30,11 @@ const HeroCard = ({ heroData }: HeroCardProps) => {
   };
 
   return (
-    <div className={styles.container} onClick={goToHeroDetailPage}>
+    <div
+      className={styles.container}
+      data-testid="hero-card-container"
+      onClick={goToHeroDetailPage}
+    >
       <div
         className={styles.imgContainer}
         style={{
@@ -38,7 +42,9 @@ const HeroCard = ({ heroData }: HeroCardProps) => {
         }}
       ></div>
       <div className={styles.nameContainer}>
-        <div className={styles.name}>{name}</div>
+        <div className={styles.name} data-testid="hero-card-name">
+          {name}
+        </div>
         <div className={styles.favContainer}>
           <Image
             className={styles.favIcon}

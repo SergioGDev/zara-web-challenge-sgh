@@ -107,7 +107,7 @@ export const HeroFinderContextProvider = ({ children }: PropsWithChildren) => {
   };
 
   return (
-    <HeroFinderContext.Provider value={providerObject}>
+    <HeroFinderContext.Provider value={providerObject} data-testid='hero-finder-context-provider'>
       {children}
     </HeroFinderContext.Provider>
   );
