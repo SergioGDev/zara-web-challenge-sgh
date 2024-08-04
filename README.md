@@ -9,6 +9,8 @@ This project is a React application built with Next.js, designed to provide a ro
 - **React:** Version 18
 - **NextJS:** Version 14.2.3
 - **Axios:** Used for making HTTP requests to interact with APIs seamlessly.
+- **SWR:** Used for have the realtime data of favs heroes.
+- **Prisma**: Created a SQLite DB for save the favs heroes.
 - **md5:** Employed to hash passwords and other sensitive data, ensuring enhanced security.
 - **Sass:** Utilized for styling, allowing for more flexible and maintainable CSS.
 - **Jest** and **React Testing Library**: Utilized for testing the app.
@@ -23,7 +25,6 @@ This project is a React application built with Next.js, designed to provide a ro
 
 This section describes the project's code structure, detailing the key components and their organization. Below are the main elements of the code:
 
-- `src/contexts`: This has the context that handle the behave of the application. Inside we have the `HeroFinderContext` that have the state of the global app (hero list, the text of the finder, etc.).
 - `src/components`: Here are the individual components of the app (`FinderInput`, `HeroCard`, etc.)
 - `src/pages`: Every page inside here have the full screen that we'll see on the screen. This pages will be used with the NextJS Router.
 - `src/helpers`: This folder have helpers to use on the main project. The methods to get the API info are here.
@@ -35,7 +36,7 @@ This section describes the project's code structure, detailing the key component
 ![image](https://github.com/SergioGDev/zara-web-challenge-sgh/assets/92792915/a384d3d2-7c26-4aad-85c0-5d2033f2e60f)
 
 #### Hero Detail Page
-![image](https://github.com/SergioGDev/zara-web-challenge-sgh/assets/92792915/27ba3fb5-b737-4973-b28b-1ee5d3e2b2d7)
+![image](https://github.com/user-attachments/assets/2777a65c-df1f-46a0-80bb-53ac47d274c7)
 
 ## Deploy on Vercel (CI/CD)
 
