@@ -1,0 +1,44 @@
+.inputFinder {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 16px;
+  flex-direction: column;
+  margin-bottom: 16px;
+
+  input {
+    width: 100%;
+    height: 40px;
+    border-color: transparent;
+    color: black;
+    border-bottom: 1px solid black;
+    text-transform: uppercase;
+
+    background: url(/images/finder-icon.svg) no-repeat scroll 8px 10px;
+    background-size: 20px 20px;
+    padding-left: 40px;
+    font-size: 18px;
+
+    ::placeholder {
+      color: #AAAAAA;
+    }
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  .resultsInfo {
+    font-size: 15px;
+  }
+  .loadingData {
+    font-size: 15px;
+    color: #AAAAAA;
+    font-style: italic;
+  }
+  .error {
+    font-size: 15px;
+    color: #4f1414;
+  }
+}

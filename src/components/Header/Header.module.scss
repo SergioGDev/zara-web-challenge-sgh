@@ -1,0 +1,26 @@
+@import '@/app/variables.scss';
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  box-shadow: 1px 1px 1px #FFFFFF30;
+  z-index: 2;
+
+  padding: 0px 40px;
+  width: 100%;
+  height: $header-height;
+  background-color: black;
+
+  .marvelLogo {
+    cursor: pointer;
+  }
+}
+
+
+@media screen and (max-width: 576px) {
+  .headerContainer {
+    padding: 0px 10px;
+  }
+}

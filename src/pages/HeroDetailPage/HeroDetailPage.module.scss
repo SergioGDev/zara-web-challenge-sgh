@@ -1,0 +1,146 @@
+@import "@/app/variables.scss";
+
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 50px;
+  flex-direction: column;
+  background-color: white;
+  min-height: calc(100vh - $header-height);
+
+  .headerHeroData {
+    background-color: black;
+    width: 100%;
+    height: $header-detail-hero-height;
+
+    .contentContainer {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-direction: row;
+      gap: 20px;
+      flex-wrap: wrap;
+
+      .heroInfo {
+        flex: 1;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+        height: $header-detail-hero-height;
+        gap: 20px;
+
+        .heroInfoHeader {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-direction: row;
+          width: 100%;
+
+          .heroName {
+            font-size: 32px;
+            font-weight: 700;
+          }
+        }
+
+        .heroInfoBody {
+          text-transform: none;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+
+  .comicsData {
+    color: black;
+    max-width: 100%;
+
+    .contentContainer {
+      
+      .comicsTitle {
+        font-size: 28px;
+        font-size: 900;
+        padding: 0px 20px;
+        margin-bottom: 20px;
+      }
+
+      .comicsContainer {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: row;
+        gap: 20px;
+        padding: 0px 20px;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+        scrollbar-color: red white;
+
+        &::-webkit-scrollbar-track {
+          background-color: white;
+        }
+      }
+    }
+  }
+}
+
+.contentContainer {
+  width: 1000px;
+  max-width: 100%;
+  margin: auto;
+}
+
+
+
+@media screen and (min-width: 577px) and (max-width: 992px) {
+  .container {
+    .headerHeroData {
+      .contentContainer {
+        .heroInfo {
+          padding-right: 20px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .container {
+    .headerHeroData {
+      height: auto;
+
+      .contentContainer {
+        flex-direction: column;
+        padding-bottom: 30px;
+
+        .heroImage {
+          width: 100%;
+          height: auto;
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+
+        .heroInfo {
+          width: 100%;
+          padding: $hero-detail-mobile-padding;
+        }
+      }
+    }
+
+    .comicsData {
+      .contentContainer {
+        .comicsTitle {
+          padding: $hero-detail-mobile-padding;
+        }
+
+        .comicsContainer {
+          padding: $hero-detail-mobile-padding;
+        }
+      }
+    }
+  }
+}

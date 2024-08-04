@@ -1,0 +1,28 @@
+@import "@/app/variables.scss";
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+
+    padding: 0px 40px;
+    width: 100%;
+    height: $header-height;
+    background-color: black;
+
+    .favs-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      gap: 6px;
+    }
+  }
+}

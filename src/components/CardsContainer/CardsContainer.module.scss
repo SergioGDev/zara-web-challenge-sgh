@@ -1,0 +1,24 @@
+@import '@/app/variables.scss';
+
+.container {
+  width: 100%;
+}
+
+.cardsContainer {
+  display: grid;
+  grid-column-gap: 16px;
+  grid-template-columns: repeat(auto-fill, $hero-card-width-desktop);
+  justify-content: space-between;
+  gap: 16px;
+  row-gap: 30px;
+  width: 100%;
+}
+
+@media screen and (max-width: 576px) {
+  .cardsContainer {
+    grid-template-columns: repeat(auto-fill, $hero-card-width-mobile);
+    gap: 10px;
+    row-gap: 20px;
+    width: 100%;
+  }
+}

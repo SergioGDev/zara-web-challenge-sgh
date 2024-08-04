@@ -1,0 +1,31 @@
+@import "@/app/variables.scss";
+
+.container {
+  background-color: white;
+  min-height: calc(100vh - $header-height);
+  padding: 40px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  color: black;
+  width: 100%;
+
+  .marginsContainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 20px;
+
+    max-width: 1400px;
+    width: 100%;
+  }
+    
+}
+
+@media screen and (max-width: 576px) {
+  .container {
+    padding: 40px 10px;
+  }
+}

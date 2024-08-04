@@ -1,0 +1,54 @@
+@import '@/app/variables.scss';
+
+.container {
+  width: $hero-card-width-desktop;
+  height: 218px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  cursor: pointer;
+
+  .imgContainer {
+    height: calc(100% - 60px);
+    width: 100%;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .nameContainer {
+    border-top: 3px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background-color: black;
+    color: white;
+    width: 100%;
+    min-height: 60px;
+    padding: 10px 14px;
+    position: relative;
+
+    .bottomRightTriangle {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      border-bottom: 10px solid white;
+      border-left: 10px solid transparent;
+      z-index: 2;
+    }
+
+    .favIcon {
+      z-index: 10;
+      cursor: pointer;
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .container {
+    width: 100%;
+  }
+}
