@@ -3,7 +3,6 @@ import styles from "./HomePage.module.scss";
 
 import FinderInput from "@/components/FinderInput/FinderInput";
 import CardsContainer from "@/components/CardsContainer/CardsContainer";
-import FavsCardsContainerWidget from "@/widgets/FavsCardsContainerWidget/FavsCardsContainerWidget";
 
 const HomePage = ({
   searchParams,

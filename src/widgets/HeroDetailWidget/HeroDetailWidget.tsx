@@ -1,14 +1,13 @@
 import React from "react";
 import styles from "./HeroDetailWidget.module.scss";
 
+import { prisma } from "@/lib/prisma";
 import { HeroDetailWidgetProps } from "./heroDetailWidget.types";
-import Image from "next/image";
 import ComicInfoContainer from "@/components/ComicInfoContainer/ComicInfoContainer";
 import { getComicsOfHero, getHeroDataById } from "@/helpers/getHerosData";
 import { ComicDataResult, HeroDataResult } from "@/types/heroAxiosResp.types";
 import FavIconImage from "@/components/FavIconImage/FavIconImage";
-import axios from "axios";
-import { prisma } from "@/lib/prisma";
+import Image from "next/image";
 
 const HeroDetailWidget = async ({ id }: HeroDetailWidgetProps) => {
   const [heroDataDetailResp, heroComicsDetailResp, favHeroesList] =

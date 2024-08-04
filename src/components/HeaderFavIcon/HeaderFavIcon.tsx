@@ -1,12 +1,9 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./HeaderFavIcon.module.scss";
 
-import { Hero } from "@prisma/client";
-import axios from "axios";
 import Link from "next/link";
 import Image from "next/image";
-import useSWR from "swr";
 import { useFavHeroes } from "@/hooks/useFavHeroes";
 
 

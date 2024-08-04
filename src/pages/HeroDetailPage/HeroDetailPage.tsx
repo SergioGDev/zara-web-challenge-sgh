@@ -6,14 +6,12 @@ interface HeroDetailPageProps {
 }
 
 const HeroDetailPage = ({ params }: HeroDetailPageProps) => {
-  if (!params || !params.id) {
-    return <div>Invalid hero ID</div>;
-  }
-
   return (
-    <Suspense fallback={<div>Loading hero data...</div>}>
-      <HeroDetailWidget id={params.id} />
-    </Suspense>
+    <div>
+      <Suspense fallback={<div>Loading hero data...</div>}>
+        <HeroDetailWidget id={params?.id || "0"} />
+      </Suspense>
+    </div>
   );
 };
 
