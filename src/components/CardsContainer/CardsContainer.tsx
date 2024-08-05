@@ -4,32 +4,45 @@ import styles from "./CardsContainer.module.scss";
 
 import HeroCard from "../HeroCard/HeroCard";
 import { getHerosData } from "@/helpers/getHerosData";
-import { HeroDataResult } from "@/types/heroAxiosResp.types";
+import { HeroDataResult, HeroSql } from "@/types/heroAxiosResp.types";
+import { sql } from "@vercel/postgres";
 
 const CardsContainer = ({ search }: { search?: string }) => {
   const [heroList, setHeroList] = useState<HeroDataResult[]>([]);
+  const [favHeroList, setFavHeroList] = useState<HeroSql[]>([]);
   const [loading, setLoading] = useState(false);
   const [errorLoadingData, setErrorLoadingData] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    getHerosData(search)
-      .then((resp) => {
-        setHeroList(resp.data.data.results as HeroDataResult[]);
-        setLoading(false);
-      })
-      .catch(() => setErrorLoadingData(true));
+    const fetchData = async() => {
+      setLoading(true);
+      try {
+        const [respHeroes, respFavHeroes] = await Promise.all([
+          getHerosData(search),
+          sql<HeroSql>`SELECT * FROM heroes`
+        ])
+  
+        setHeroList(respHeroes.data.data.results as HeroDataResult[]);
+        setFavHeroList(respFavHeroes.rows)
+      } catch(error) {
+        setErrorLoadingData(true);
+      }
+
+      setLoading(false);
+    }
+
+    fetchData();
   }, [search]);
 
   if (loading) return <div>Loading heroes data...</div>;
-  if (errorLoadingData) return <div>Error getting data</div>;
+  if (errorLoadingData) return <div>Error getting data...</div>;
 
   return (
     <div className={styles.container}>
       <div>{`${heroList.length} results`}</div>
       <div className={styles.cardsContainer}>
         {heroList.map((heroData) => (
-          <HeroCard heroData={heroData as HeroDataResult} key={heroData.id} />
+          <HeroCard heroData={heroData as HeroDataResult} isFav={favHeroList.some((favHero) => +favHero.id === heroData.id)} key={heroData.id} />
         ))}
       </div>
     </div>

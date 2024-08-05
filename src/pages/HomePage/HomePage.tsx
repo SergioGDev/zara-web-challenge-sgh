@@ -2,14 +2,7 @@ import React, { Suspense } from "react";
 import styles from "./HomePage.module.scss";
 
 import FinderInput from "@/components/FinderInput/FinderInput";
-import dynamic from "next/dynamic";
-
-const CardsContainer = dynamic(
-  () => import("@/components/CardsContainer/CardsContainer"),
-  {
-    suspense: true,
-  },
-);
+import CardsContainer from "@/components/CardsContainer/CardsContainer";
 
 const HomePage = ({ searchParams }: { searchParams?: { search?: string } }) => {
   const search = searchParams?.search || "";

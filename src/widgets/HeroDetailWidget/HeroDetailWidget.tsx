@@ -5,30 +5,40 @@ import styles from "./HeroDetailWidget.module.scss";
 import { HeroDetailWidgetProps } from "./heroDetailWidget.types";
 import ComicInfoContainer from "@/components/ComicInfoContainer/ComicInfoContainer";
 import { getComicsOfHero, getHeroDataById } from "@/helpers/getHerosData";
-import { ComicDataResult, HeroDataResult } from "@/types/heroAxiosResp.types";
+import { ComicDataResult, HeroDataResult, HeroSql } from "@/types/heroAxiosResp.types";
 import FavIconImage from "@/components/FavIconImage/FavIconImage";
 import Image from "next/image";
+import { sql } from "@vercel/postgres";
 
 const HeroDetailWidget = ({ id }: HeroDetailWidgetProps) => {
   const [heroDataDetail, setHeroDataDetail] = useState<HeroDataResult>();
   const [heroComicsDetail, setHeroComicsDetail] = useState<ComicDataResult[]>();
+  const [favHeroList, setFavHeroList] = useState<HeroSql[]>([]);
   const [loading, setLoading] = useState(true)
+  const [errorGettingData, setErrorGettingData] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const [heroDataDetailResp, heroComicsDetailResp] = await Promise.all([
-        getHeroDataById(+id),
-        getComicsOfHero(+id),
-      ]);
+      try {
+        const [heroDataDetailResp, heroComicsDetailResp, respFavHeroes] = await Promise.all([
+          getHeroDataById(+id),
+          getComicsOfHero(+id),
+          sql<HeroSql>`SELECT * FROM heroes`
+        ]);
+  
+        setHeroDataDetail(
+          (heroDataDetailResp.data.data.results as HeroDataResult[])[0],
+        );
+  
+        setHeroComicsDetail(
+          heroComicsDetailResp.data.data.results as ComicDataResult[],
+        );
 
-      setHeroDataDetail(
-        (heroDataDetailResp.data.data.results as HeroDataResult[])[0],
-      );
-
-      setHeroComicsDetail(
-        heroComicsDetailResp.data.data.results as ComicDataResult[],
-      );
+        setFavHeroList(respFavHeroes.rows)
+      } catch(error) {
+        setErrorGettingData(true);
+      }
       setLoading(false);
     };
 
@@ -37,6 +47,7 @@ const HeroDetailWidget = ({ id }: HeroDetailWidgetProps) => {
 
   if (loading)
     return <div>Loading hero data...</div>;
+  if (errorGettingData) return <div>Error getting data...</div>
 
   return (
     <div className={styles.container}>
@@ -54,7 +65,7 @@ const HeroDetailWidget = ({ id }: HeroDetailWidgetProps) => {
           <div className={styles.heroInfo}>
             <div className={styles.heroInfoHeader}>
               <div className={styles.heroName}>{heroDataDetail!.name}</div>
-              <FavIconImage heroData={heroDataDetail!} width={30} />
+              <FavIconImage isFav={favHeroList.some((favHero) => +favHero.id === heroDataDetail!.id)} heroData={heroDataDetail!} width={30} />
             </div>
             <div className={styles.heroInfoBody}>
               {heroDataDetail!.description}

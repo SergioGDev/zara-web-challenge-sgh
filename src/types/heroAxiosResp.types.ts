@@ -185,3 +185,10 @@ export interface Events {
   items: Item[];
   returned: number;
 }
+
+export interface HeroSql {
+  id: string;
+  name: string;
+  path: string;
+  extension: string;
+}

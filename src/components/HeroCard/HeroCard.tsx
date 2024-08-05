@@ -5,7 +5,7 @@ import { HeroCardProps } from "./heroCard.types";
 import Link from "next/link";
 import FavIconImage from "../FavIconImage/FavIconImage";
 
-const HeroCard = ({ heroData }: HeroCardProps) => {
+const HeroCard = ({ heroData, isFav }: HeroCardProps) => {
   const { id, thumbnail, name } = heroData;
 
   return (
@@ -24,7 +24,7 @@ const HeroCard = ({ heroData }: HeroCardProps) => {
         <div className={styles.name} data-testid="hero-card-name">
           {name}
         </div>
-        <FavIconImage heroData={heroData} width={20} />
+        <FavIconImage heroData={heroData} isFav={isFav} width={20} />
         <div className={styles.bottomRightTriangle}></div>
       </div>
     </Link>

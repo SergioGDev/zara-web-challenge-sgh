@@ -4,27 +4,25 @@ import styles from "./FavIconImage.module.scss";
 
 import Image from "next/image";
 import { FavIconImageProps } from "./favIconImage.types";
+import { sql } from "@vercel/postgres";
 import { useFavHeroes } from "@/hooks/useFavHeroes";
 
-const FavIconImage = ({ heroData, width }: FavIconImageProps) => {
-  const [isFavHero, setIsFavHero] = useState(false);
-  const { heroes, addHero } = useFavHeroes();
-
-  useEffect(() => {
-    setIsFavHero(heroes.some((hero) => hero.id === heroData.id));
-  }, [heroData.id, heroes, heroes.length]);
-
+const FavIconImage = ({ heroData, isFav, width }: FavIconImageProps) => {
+  const [isFavState, setIsFavState] = useState(isFav)
+  const { mutate } = useFavHeroes();
   const setFav = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     event.preventDefault();
     event.stopPropagation();
 
-    addHero({
-      id: heroData.id,
-      name: heroData.name,
-      path: heroData.thumbnail.path,
-      extension: heroData.thumbnail.extension,
-    });
-    setIsFavHero((prev) => !prev);
+    if (isFav) {
+      sql`DELETE FROM heroes WHERE id=${heroData.id}`
+      setIsFavState(false);
+    } else {
+      sql`INSERT INTO heroes (id, name, path, extension) VALUES (${heroData.id}, ${heroData.name}, ${heroData.thumbnail.path}, ${heroData.thumbnail.extension})`
+      setIsFavState(true);
+    }
+
+    mutate();
   };
 
   return (
@@ -36,7 +34,7 @@ const FavIconImage = ({ heroData, width }: FavIconImageProps) => {
     >
       <Image
         src={
-          isFavHero ? `/images/heart-icon.svg` : `/images/empty-heart-icon.svg`
+          isFavState ? `/images/heart-icon.svg` : `/images/empty-heart-icon.svg`
         }
         width={width}
         height={width}

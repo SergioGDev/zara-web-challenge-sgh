@@ -3,23 +3,27 @@ import React, { useEffect, useState } from "react";
 import styles from "./FavsCardsContainerWidget.module.scss";
 
 import HeroCard from "@/components/HeroCard/HeroCard";
-import { HeroDataResult } from "@/types/heroAxiosResp.types";
-import { Hero } from "@prisma/client";
-import axios from "axios";
+import { HeroDataResult, HeroSql } from "@/types/heroAxiosResp.types";
+import { sql } from "@vercel/postgres";
 
 const FavsCardsContainerWidget = () => {
   const [heroList, setHeroList] = useState<HeroDataResult[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const checkFavHeroList = async () => {
-      const resp = await axios.get<Hero[]>("/api/heroes");
+      setLoading(true);
+      const {rows} = await sql<HeroSql>`SELECT * FROM heroes`
+      
       setHeroList(
-        resp.data.map(({ id, name, path, extension }) => ({
-          id,
+        rows.map(({ id, name, path, extension }) => ({
+          id: +id,
           name,
           thumbnail: { path, extension },
         })),
       );
+      
+      setLoading(false);
     };
     
     checkFavHeroList();
@@ -30,7 +34,7 @@ const FavsCardsContainerWidget = () => {
       <div>{`${heroList.length} results`}</div>
       <div className={styles.cardsContainer}>
         {heroList.map((heroData) => (
-          <HeroCard heroData={heroData as HeroDataResult} key={heroData.id} />
+          <HeroCard heroData={heroData as HeroDataResult} isFav={heroList.some((favHero) => favHero.id === heroData.id)} key={heroData.id} />
         ))}
       </div>
     </div>

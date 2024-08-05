@@ -8,7 +8,7 @@ import { useFavHeroes } from "@/hooks/useFavHeroes";
 
 const HeaderFavIcon = () => {
   const { heroes } = useFavHeroes();
-
+  
   return (
     <Link href={"/favs"} className={styles.favsContainer}>
       <Image
@@ -17,7 +17,7 @@ const HeaderFavIcon = () => {
         width={24}
         height={21}
       />{" "}
-      <span>{heroes?.length}</span>
+      <span>{heroes.length}</span>
     </Link>
   );
 };
