@@ -1,7 +1,7 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import styles from "./HeroDetailWidget.module.scss";
 
-import { prisma } from "@/lib/prisma";
 import { HeroDetailWidgetProps } from "./heroDetailWidget.types";
 import ComicInfoContainer from "@/components/ComicInfoContainer/ComicInfoContainer";
 import { getComicsOfHero, getHeroDataById } from "@/helpers/getHerosData";
@@ -9,19 +9,34 @@ import { ComicDataResult, HeroDataResult } from "@/types/heroAxiosResp.types";
 import FavIconImage from "@/components/FavIconImage/FavIconImage";
 import Image from "next/image";
 
-const HeroDetailWidget = async ({ id }: HeroDetailWidgetProps) => {
-  const [heroDataDetailResp, heroComicsDetailResp, favHeroesList] =
-    await Promise.all([
-      getHeroDataById(+id),
-      getComicsOfHero(+id),
-      prisma.hero.findMany(),
-    ]);
+const HeroDetailWidget = ({ id }: HeroDetailWidgetProps) => {
+  const [heroDataDetail, setHeroDataDetail] = useState<HeroDataResult>();
+  const [heroComicsDetail, setHeroComicsDetail] = useState<ComicDataResult[]>();
+  const [loading, setLoading] = useState(true)
 
-  const heroDataDetail = (
-    heroDataDetailResp.data.data.results as HeroDataResult[]
-  )[0];
-  const heroComicsDetail = heroComicsDetailResp.data.data
-    .results as ComicDataResult[];
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      const [heroDataDetailResp, heroComicsDetailResp] = await Promise.all([
+        getHeroDataById(+id),
+        getComicsOfHero(+id),
+      ]);
+
+      setHeroDataDetail(
+        (heroDataDetailResp.data.data.results as HeroDataResult[])[0],
+      );
+
+      setHeroComicsDetail(
+        heroComicsDetailResp.data.data.results as ComicDataResult[],
+      );
+      setLoading(false);
+    };
+
+    fetchData();
+  }, [id]);
+
+  if (loading)
+    return <div>Loading hero data...</div>;
 
   return (
     <div className={styles.container}>
@@ -39,7 +54,7 @@ const HeroDetailWidget = async ({ id }: HeroDetailWidgetProps) => {
           <div className={styles.heroInfo}>
             <div className={styles.heroInfoHeader}>
               <div className={styles.heroName}>{heroDataDetail!.name}</div>
-              <FavIconImage heroData={heroDataDetail} width={30} />
+              <FavIconImage heroData={heroDataDetail!} width={30} />
             </div>
             <div className={styles.heroInfoBody}>
               {heroDataDetail!.description}

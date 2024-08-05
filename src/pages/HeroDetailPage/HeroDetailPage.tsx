@@ -1,5 +1,5 @@
-import React, { Suspense } from "react";
-import styles from './HeroDetailPage.module.scss';
+import React from "react";
+import styles from "./HeroDetailPage.module.scss";
 
 import HeroDetailWidget from "@/widgets/HeroDetailWidget/HeroDetailWidget";
 
@@ -10,9 +10,7 @@ interface HeroDetailPageProps {
 const HeroDetailPage = ({ params }: HeroDetailPageProps) => {
   return (
     <div className={styles.container}>
-      <Suspense fallback={<div>Loading hero data...</div>}>
-        <HeroDetailWidget id={params?.id || "0"} />
-      </Suspense>
+      <HeroDetailWidget id={params?.id || "0"} />
     </div>
   );
 };

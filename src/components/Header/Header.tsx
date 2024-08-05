@@ -17,21 +17,7 @@ const Header = () => {
           priority={true}
         />
       </Link>
-      <Suspense
-        fallback={
-          <Link href={"/favs"} className={styles.favsContainer}>
-            <Image
-              src="/images/heart-icon.svg"
-              alt="Favs Icon"
-              width={24}
-              height={21}
-            />{" "}
-            <span>0</span>
-          </Link>
-        }
-      >
-        <HeaderFavIcon />
-      </Suspense>
+      <HeaderFavIcon />
     </div>
   );
 };

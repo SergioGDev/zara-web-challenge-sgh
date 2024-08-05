@@ -2,10 +2,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "./FavIconImage.module.scss";
 
-import { FavIconImageProps } from "./favIconImage.types";
 import Image from "next/image";
-import axios from "axios";
-import { Hero } from "@prisma/client";
+import { FavIconImageProps } from "./favIconImage.types";
 import { useFavHeroes } from "@/hooks/useFavHeroes";
 
 const FavIconImage = ({ heroData, width }: FavIconImageProps) => {
