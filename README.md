@@ -10,7 +10,6 @@ This project is a React application built with Next.js, designed to provide a ro
 - **NextJS:** Version 14.2.3
 - **Axios:** Used for making HTTP requests to interact with APIs seamlessly.
 - **SWR:** Used for have the realtime data of favs heroes.
-- **Prisma**: Created a SQLite DB for save the favs heroes.
 - **md5:** Employed to hash passwords and other sensitive data, ensuring enhanced security.
 - **Sass:** Utilized for styling, allowing for more flexible and maintainable CSS.
 - **Jest** and **React Testing Library**: Utilized for testing the app.
