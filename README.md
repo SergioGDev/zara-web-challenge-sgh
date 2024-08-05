@@ -12,6 +12,7 @@ This project is a React application built with Next.js, designed to provide a ro
 - **SWR:** Used for have the realtime data of favs heroes.
 - **md5:** Employed to hash passwords and other sensitive data, ensuring enhanced security.
 - **Sass:** Utilized for styling, allowing for more flexible and maintainable CSS.
+- **Vercel Postgres**: A framework of vercel for manage the DB made into Vercel's hosting.
 - **Jest** and **React Testing Library**: Utilized for testing the app.
 
 ## Scripts
